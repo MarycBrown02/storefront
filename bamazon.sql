@@ -42,4 +42,8 @@ VALUES (9, 'headphones ', 'musick', 63.00, 9);
 INSERT INTO products (item_id, product_name, department_name, price,stogk_quantity )
 VALUES (10, ' Microsoft Surface Book 2 ', 'electronics', 12.95, 6);
 
-SELECT * FROM bamsondb.products;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Moebrown2633';
+-- or
+CREATE USER 'foo'@'%' IDENTIFIED WITH mysql_native_password BY 'bar';
+-- then
+FLUSH PRIVILEGES;
