@@ -8,38 +8,41 @@ var connection = mysql.createConnection({
     password: "Moebrown2633",
     database: "bamsondb"
 });
+connection.connect(function(err, ress) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId);
+  storeItums();
+  
+});
 
-
-
-connection.connect(function(err) {
-    if (err) throw err;
-    store();
+function storeItums() {
+  connection.query("SELECT * FROM products", function(err, res) {
+    for (var i = 0; i < res.length; i++) {
+      console.log(res[i].item_id + " | " + res[i].product_name  + " | " + res[i].department_name + " | " + res[i].price);
+    }
+     
   });
-  
 
-
-  function store() {
-    
-    inquirer
-      .prompt({
-        name: "idNumber",
-        type: "rawlist",
-        message: "what id number do you want?",
-        choices: ["1", "2","3","4","5","6","7","8","9","10"]
-      }) 
-      .then(function(answer){
-        if (answer.item_id === true){
-         console.log("how many do you want?")
-
-         }else {
-           console.log("come back again.")
-         }
-
-
-      });
- }
-
+  inquirer.prompt({
+      name: "products",
+      type: "input",
+      message: "what item number do you want?"
       
-  
-    
+    },
+    {
+      name: "quantity",
+      type: "input",
+      message: "how many do whant?"
 
+    }).then(function(answer){ 
+      for (var i = 0; i < res.length; i++) {
+         if(answer.products === res[i].item_id){
+          console.log( "hi");
+          
+        }
+        
+      }  
+     
+      })
+    } 
+    
